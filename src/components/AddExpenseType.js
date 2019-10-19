@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 
 const AddExpenseType = props => {
   const [expenseType, setExpenseType] = useState("")
-  const [budget, setBudget] = useState(0)
+  const [budget, setBudget] = useState("")
   const [id, setID] = useState(0)
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const AddExpenseType = props => {
       <form onSubmit={onSubmit} className="addType">
         <h4>Add New Expense Category</h4>
         <label>
-          Expense Type
+          Expense Type:
           <input
             id="type"
             type="text"
@@ -36,9 +36,10 @@ const AddExpenseType = props => {
         </label>
         <br />
         <label>
-          Budget
+          Budget: $
           <input
             type="number"
+            placeholder="0.00"
             value={budget}
             onChange={e => setBudget(e.currentTarget.value)}
             required

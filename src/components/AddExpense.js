@@ -4,7 +4,7 @@ import { connect } from "react-redux"
 const AddExpense = props => {
   //const [type, setType] = useState(props.type)
   //const type = props.expenseType
-  const [amount, setAmount] = useState(0)
+  const [amount, setAmount] = useState("")
   const [description, setDescription] = useState("")
   const [type, setType] = useState("")
   const id = Math.ceil(Math.random() * 1000000)
@@ -71,12 +71,7 @@ const AddExpense = props => {
       <div>
         <h4>Add Expense Item</h4>
         <label>Type:</label>
-        <input
-          readOnly
-          type="text"
-          value={type}
-          //onChange={e => setType(e.currentTarget.value)}
-        />
+        <input readOnly type="text" value={type} />
       </div>
 
       <div>
@@ -88,13 +83,14 @@ const AddExpense = props => {
         />
       </div>
       <div>
-        <label>Amount:</label>
+        <label>amount: $</label>
         <input
           type="number"
           min="0.01"
-          step="0.01" // TODO: find a better way to trim to 2 decimal places.
+          step="0.01"
+          placeholder="0.00"
           value={amount}
-          onChange={e => setAmount(e.currentTarget.value)} // using parsefloat is a janky solution that throws warnings
+          onChange={e => setAmount(e.currentTarget.value)}
           required
         />
         {/* maybe a custom hook for this one? */}
