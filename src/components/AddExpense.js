@@ -7,7 +7,7 @@ const AddExpense = props => {
   const [amount, setAmount] = useState(0)
   const [description, setDescription] = useState("")
   const [type, setType] = useState("")
-  const id = Math.random()
+  const id = Math.ceil(Math.random() * 1000000)
 
   useEffect(() => {
     const expenseType = props.expenseTypes.filter(
@@ -100,10 +100,10 @@ const AddExpense = props => {
         {/* maybe a custom hook for this one? */}
       </div>
 
-      <button onSubmit={onSubmit}>Add</button>
       <button type="button" onClick={back}>
-        Back
+        Cancel
       </button>
+      <button onSubmit={onSubmit}>Add</button>
     </form>
   )
 }

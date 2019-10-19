@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 
 const ExpenseTypeTest = props => {
   const [isClicked, setClicked] = useState(false)
+
   // handle delete button click
   const handleDelete = () => {
     props.deleteType(props.id, props.type)

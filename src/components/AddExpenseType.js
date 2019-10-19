@@ -1,18 +1,23 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { connect } from "react-redux"
 
 const AddExpenseType = props => {
   const [expenseType, setExpenseType] = useState("")
   const [budget, setBudget] = useState(0)
+  const [id, setID] = useState(0)
+
+  useEffect(() => {
+    setID(props.match.params.expense_type_id)
+  }, [props.match.params.expense_type_id])
 
   const onSubmit = e => {
     e.preventDefault()
-    props.addType({ type: expenseType, budget: budget })
+    props.addType({ id: id, type: expenseType, budget: budget })
     back()
   }
   const back = () => {
-    setExpenseType([])
-    setBudget([])
+    setExpenseType("")
+    setBudget(0)
     props.history.push("/")
   }
   return (
@@ -26,6 +31,7 @@ const AddExpenseType = props => {
             type="text"
             value={expenseType}
             onChange={e => setExpenseType(e.currentTarget.value)}
+            required
           />
         </label>
         <br />
@@ -35,13 +41,14 @@ const AddExpenseType = props => {
             type="number"
             value={budget}
             onChange={e => setBudget(e.currentTarget.value)}
+            required
           />
         </label>
         <br />
         <button type="button" onClick={back}>
-          back
+          Cancel
         </button>
-        <button type="submit">add</button>
+        <button type="submit">Add</button>
       </form>
     </div>
   )

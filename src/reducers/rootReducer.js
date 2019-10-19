@@ -47,7 +47,7 @@ const rootReducer = (state = initState, action) => {
     }
   } else if (action.type === "ADD_TYPE") {
     const newType = {
-      id: Math.random(),
+      id: action.expenseType.id,
       budget: action.expenseType.budget,
       type: action.expenseType.type
     }

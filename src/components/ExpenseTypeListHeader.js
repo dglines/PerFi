@@ -18,7 +18,9 @@ const ExpenseTypeListHeader = props => {
         <span>......</span>
         <span className="actual">{props.actual}</span>
         <span>......</span>
-        <span className="diff">{props.planned - props.actual}</span>
+        <span className="diff">
+          {Number(props.planned - props.actual).toFixed(2)}
+        </span>
       </div>
     </div>
   )
