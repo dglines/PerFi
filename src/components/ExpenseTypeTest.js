@@ -13,8 +13,9 @@ const ExpenseTypeTest = props => {
 
   return (
     <div>
-      <div className="expenseType">
-        <span onClick={() => setClicked(!isClicked)}>{props.type}......</span>
+      <div className="expenseType" onClick={() => setClicked(!isClicked)}>
+        <button onClick={handleDelete}>delete</button>
+        <span>{props.type}......</span>
         <span className="planned">{props.budget}</span>
         <span>.........</span>
         <span className="actual">{props.balance}</span>
@@ -24,7 +25,6 @@ const ExpenseTypeTest = props => {
         </span>
         <span>
           .....
-          <button onClick={handleDelete}>delete</button>
           <Link to={"/expense/" + props.id}>+</Link>
         </span>
       </div>
