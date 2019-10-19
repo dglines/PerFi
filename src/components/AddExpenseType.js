@@ -1,45 +1,61 @@
 import React, { useState } from "react"
-import firebase from "../firebase"
+import { connect } from "react-redux"
 
-export const AddExpenseType = () => {
-  const [expenseType, setExpenseType] = useState()
-  const [budget, setBudget] = useState()
+const AddExpenseType = props => {
+  const [expenseType, setExpenseType] = useState("")
+  const [budget, setBudget] = useState(0)
 
-  function onSubmit(e) {
+  const onSubmit = e => {
     e.preventDefault()
-
-    firebase
-      .firestore()
-      .collection("ExpenseTypes")
-      .add({
-        type: expenseType,
-        balance: 0,
-        budget: parseInt(budget)
-      })
-      .then(() => {
-        setExpenseType("")
-        setBudget("")
-      })
+    props.addType({ type: expenseType, budget: budget })
+    back()
+  }
+  const back = () => {
+    setExpenseType([])
+    setBudget([])
+    props.history.push("/")
   }
   return (
-    <form onSubmit={onSubmit}>
-      <div>
-        <label>Expense Type</label>
-        <input
-          type="text"
-          value={expenseType}
-          onChange={e => setExpenseType(e.currentTarget.value)}
-        />
-      </div>
-      <div>
-        <label>Budget</label>
-        <input
-          type="number"
-          value={budget}
-          onChange={e => setBudget(e.currentTarget.value)}
-        />
-      </div>
-      <button>Add</button>
-    </form>
+    <div>
+      <form onSubmit={onSubmit} className="addType">
+        <h4>Add New Expense Category</h4>
+        <label>
+          Expense Type
+          <input
+            id="type"
+            type="text"
+            value={expenseType}
+            onChange={e => setExpenseType(e.currentTarget.value)}
+          />
+        </label>
+        <br />
+        <label>
+          Budget
+          <input
+            type="number"
+            value={budget}
+            onChange={e => setBudget(e.currentTarget.value)}
+          />
+        </label>
+        <br />
+        <button type="button" onClick={back}>
+          back
+        </button>
+        <button type="submit">add</button>
+      </form>
+    </div>
   )
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addType: newType => {
+      dispatch({ type: "ADD_TYPE", expenseType: newType })
+    }
+  }
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(AddExpenseType)

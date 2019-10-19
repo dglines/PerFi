@@ -1,0 +1,31 @@
+.table-header {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.planned {
+  color: rgb(192, 196, 6);
+}
+.actual {
+  color: rgb(57, 57, 202);
+}
+.diff {
+  color: rgb(53, 179, 53);
+}
+.expenseType {
+  border: blue;
+  border-style: solid;
+  background: rgb(235, 233, 233);
+}
+.expenseItem {
+  color: rgb(219, 77, 77);
+}
+.addItem {
+  border: blue;
+  border-style: ridge;
+  padding: 50px;
+}
+.addType {
+  border: blue;
+  border-style: double;
+}
