@@ -4,9 +4,9 @@ import { connect } from "react-redux"
 const AddExpense = props => {
   //const [type, setType] = useState(props.type)
   //const type = props.expenseType
-  const [amount, setAmount] = useState()
-  const [description, setDescription] = useState()
-  const [type, setType] = useState()
+  const [amount, setAmount] = useState(0)
+  const [description, setDescription] = useState("")
+  const [type, setType] = useState("")
   const id = Math.random()
 
   useEffect(() => {
@@ -62,8 +62,8 @@ const AddExpense = props => {
 
   // back button click handler
   const back = () => {
-    setAmount([])
-    setDescription([])
+    setAmount(0)
+    setDescription("")
     props.history.push("/")
   }
   return (
