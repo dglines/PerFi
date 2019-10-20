@@ -6,16 +6,11 @@ import { Link } from "react-router-dom"
 const ExpenseTypeTest = props => {
   const [isClicked, setClicked] = useState(false)
 
-  // handle delete button click
-  const handleDelete = () => {
-    props.deleteType(props.id, props.type)
-  }
-
   return (
     <div>
       <div className="expenseType" onClick={() => setClicked(!isClicked)}>
-        <button onClick={handleDelete}>delete</button>
-        <span>{props.type}......</span>
+        <Link to={"/type/" + props.id}>edit</Link>
+        <span>...{props.type}......</span>
         <span className="planned">{props.budget}</span>
         <span>.........</span>
         <span className="actual">{props.balance}</span>
@@ -44,14 +39,4 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    deleteType: (id, type) => {
-      dispatch({ type: "DELETE_TYPE", id: id, expenseType: type })
-    }
-  }
-}
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ExpenseTypeTest)
+export default connect(mapStateToProps)(ExpenseTypeTest)

@@ -7,13 +7,15 @@ const AddExpense = props => {
   const [amount, setAmount] = useState("")
   const [description, setDescription] = useState("")
   const [type, setType] = useState("")
-  const id = Math.ceil(Math.random() * 1000000)
+  const id = Math.ceil(Math.random() * 1000000).toString()
 
   useEffect(() => {
-    const expenseType = props.expenseTypes.filter(
+    const expenseType = props.expenseTypes.find(
       type => type.id === props.match.params.expense_type_id
     )
-    setType(expenseType[0].type)
+    // console.log(props.expenseTypes, props.match.params.expense_type_id)
+    // console.log("type", expenseType)
+    setType(expenseType.type)
   }, [props, props.expenseTypes, props.match.params.expense_type_id, type])
 
   /* FIREBASE SUBSCRIPTION

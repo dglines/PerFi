@@ -6,7 +6,7 @@ const Home = props => {
   return (
     <div>
       <ExpenseTypeList history={props.history} />
-      <Link to={"/type/" + Math.ceil(Math.random() * 1000000)}>+</Link>
+      <Link to={"/type/0"}>+</Link>
     </div>
   )
 }

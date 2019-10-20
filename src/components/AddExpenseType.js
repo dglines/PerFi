@@ -4,26 +4,53 @@ import { connect } from "react-redux"
 const AddExpenseType = props => {
   const [expenseType, setExpenseType] = useState("")
   const [budget, setBudget] = useState("")
-  const [id, setID] = useState(0)
+  const [id, setID] = useState("")
+  const [btnText, setBtnText] = useState("Add")
 
   useEffect(() => {
-    setID(props.match.params.expense_type_id)
-  }, [props.match.params.expense_type_id])
+    const tempType = props.expenseTypes.find(
+      type => type.id === props.match.params.expense_type_id
+    )
+    if (typeof tempType !== "undefined") {
+      // If the expense_type_id route param is 0, it is a new expense type.
+      // Otherwise, it is an existing expense type so populate form fields.
+      setID(tempType.id)
+      setExpenseType(tempType.type)
+      setBudget(tempType.budget)
+      setBtnText("Update")
+    } else {
+      // generate a new ID for this new expense type
+      setID(Math.ceil(Math.random() * 1000000).toString())
+    }
+  }, [props, props.match.params.expense_type_id])
 
   const onSubmit = e => {
     e.preventDefault()
     props.addType({ id: id, type: expenseType, budget: budget })
     back()
   }
+  // handle delete button click
+  const handleDelete = () => {
+    props.deleteType(id, expenseType)
+    back()
+  }
   const back = () => {
     setExpenseType("")
-    setBudget(0)
+    setBudget("")
     props.history.push("/")
   }
+
   return (
     <div>
       <form onSubmit={onSubmit} className="addType">
-        <h4>Add New Expense Category</h4>
+        <h4>{btnText} Expense Category</h4>
+        {btnText === "Update" && (
+          <div>
+            <button type="button" onClick={handleDelete}>
+              Delete
+            </button>
+          </div>
+        )}
         <label>
           Expense Type:
           <input
@@ -49,21 +76,30 @@ const AddExpenseType = props => {
         <button type="button" onClick={back}>
           Cancel
         </button>
-        <button type="submit">Add</button>
+        <button type="submit">{btnText}</button>
       </form>
     </div>
   )
+}
+
+const mapStateToProps = state => {
+  return {
+    expenseTypes: state.expenseTypes
+  }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     addType: newType => {
       dispatch({ type: "ADD_TYPE", expenseType: newType })
+    },
+    deleteType: (id, type) => {
+      dispatch({ type: "DELETE_TYPE", id: id, expenseType: type })
     }
   }
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(AddExpenseType)
