@@ -7,15 +7,24 @@ const AddExpense = props => {
   const [amount, setAmount] = useState("")
   const [description, setDescription] = useState("")
   const [type, setType] = useState("")
-  const id = Math.ceil(Math.random() * 1000000).toString()
+  const [id, setId] = useState("")
+  const [btnText, setBtnText] = useState("Add")
 
   useEffect(() => {
-    const expenseType = props.expenseTypes.find(
-      type => type.id === props.match.params.expense_type_id
+    const existingExpense = props.expenses.find(
+      type => type.id === props.match.params.expense_id
     )
-    // console.log(props.expenseTypes, props.match.params.expense_type_id)
-    // console.log("type", expenseType)
-    setType(expenseType.type)
+    if (typeof existingExpense === "undefined") {
+      // new type
+      setId(Math.ceil(Math.random() * 1000000).toString())
+      setType(props.match.params.expense_type)
+    } else {
+      setId(props.match.params.expense_id)
+      setType(existingExpense.type)
+      setDescription(existingExpense.description)
+      setAmount(existingExpense.amount)
+      setBtnText("Update")
+    }
   }, [props, props.expenseTypes, props.match.params.expense_type_id, type])
 
   /* FIREBASE SUBSCRIPTION
@@ -62,16 +71,29 @@ const AddExpense = props => {
     back()
   }
 
+  const handleDelete = () => {
+    props.deleteExpense(id)
+    back()
+  }
+
   // back button click handler
   const back = () => {
     setAmount(0)
     setDescription("")
     props.history.push("/")
   }
+
   return (
     <form onSubmit={onSubmit} className="addItem">
       <div>
-        <h4>Add Expense Item</h4>
+        <h4>{btnText} Expense Item</h4>
+        {btnText === "Update" && (
+          <div>
+            <button type="button" onClick={handleDelete}>
+              Delete
+            </button>
+          </div>
+        )}
         <label>Type:</label>
         <input readOnly type="text" value={type} />
       </div>
@@ -101,13 +123,14 @@ const AddExpense = props => {
       <button type="button" onClick={back}>
         Cancel
       </button>
-      <button onSubmit={onSubmit}>Add</button>
+      <button onSubmit={onSubmit}>{btnText}</button>
     </form>
   )
 }
 const mapStateToProps = state => {
   return {
-    expenseTypes: state.expenseTypes
+    expenseTypes: state.expenseTypes,
+    expenses: state.expenses
   }
 }
 
@@ -115,11 +138,14 @@ const mapDispatchToProps = dispatch => {
   return {
     addExpense: expense => {
       dispatch({ type: "ADD_EXPENSE", expense: expense })
+    },
+    deleteExpense: id => {
+      dispatch({ type: "DELETE_EXPENSE", id: id })
     }
   }
 }
 
 export default connect(
-  mapStateToProps, // no need for state
+  mapStateToProps,
   mapDispatchToProps
 )(AddExpense)

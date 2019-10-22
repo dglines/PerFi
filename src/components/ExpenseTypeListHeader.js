@@ -6,18 +6,15 @@ const ExpenseTypeListHeader = props => {
   return (
     <div>
       <div className="table-header">
-        <span>Expenses......</span>
+        <span>Expenses</span>
         <span className="planned">planned</span>
-        <span>......</span>
         <span className="actual">actual</span>
-        <span>......</span>
         <span className="diff">diff</span>
       </div>
       <div>
-        <span className="planned">............{props.planned}</span>
-        <span>......</span>
-        <span className="actual">{props.actual}</span>
-        <span>......</span>
+        <span>________</span>
+        <span className="planned">{Number(props.planned).toFixed(2)}</span>
+        <span className="actual">{Number(props.actual).toFixed(2)}</span>
         <span className="diff">
           {Number(props.planned - props.actual).toFixed(2)}
         </span>

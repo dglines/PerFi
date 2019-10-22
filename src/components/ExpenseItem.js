@@ -1,22 +1,16 @@
 import React from "react"
 import { connect } from "react-redux"
+import { Link } from "react-router-dom"
+import MaterialIcon from "material-icons-react"
 
 const ExpenseItem = props => {
-  // Click handler for delete button
-  const handleClick = () => {
-    return props.deleteExpense(props.id)
-  }
-
   return (
     <div className="expenseItem">
-      <span>
-        ........
-        {props.description}
-        ........
-        {props.amount}
-        .....
-        <button onClick={handleClick}>delete</button>
-      </span>
+      <span className="description">{props.description}</span>
+      <span className="amount">{Number(props.amount).toFixed(2)}</span>
+      <Link to={"/expense/" + props.type + "/" + props.id}>
+        <MaterialIcon icon="edit" size="15" />
+      </Link>
     </div>
   )
 }

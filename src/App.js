@@ -11,7 +11,7 @@ export const App = () => (
     <AddExpense />*/}
       <Route exact path="/" component={Home} />
       <Route path="/type/:expense_type_id" component={AddExpenseType} />
-      <Route path="/expense/:expense_type_id" component={AddExpense} />
+      <Route path="/expense/:expense_type/:expense_id" component={AddExpense} />
     </div>
   </BrowserRouter>
 )

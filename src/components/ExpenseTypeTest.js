@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import ExpenseList from "./ExpenseList"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
+import MaterialIcon from "material-icons-react"
 
 const ExpenseTypeTest = props => {
   const [isClicked, setClicked] = useState(false)
@@ -9,18 +10,19 @@ const ExpenseTypeTest = props => {
   return (
     <div>
       <div className="expenseType" onClick={() => setClicked(!isClicked)}>
-        <Link to={"/type/" + props.id}>edit</Link>
-        <span>...{props.type}......</span>
-        <span className="planned">{props.budget}</span>
-        <span>.........</span>
-        <span className="actual">{props.balance}</span>
-        <span>.........</span>
+        <Link to={"/type/" + props.id} className="edit_icon">
+          <MaterialIcon icon="edit" size="15" />
+        </Link>
+        <span>{props.type}</span>
+        <span className="planned">{Number(props.budget).toFixed(2)}</span>
+        <span className="actual">{Number(props.balance).toFixed(2)}</span>
         <span className="diff">
           {Number(props.budget - props.balance).toFixed(2)}
         </span>
         <span>
-          .....
-          <Link to={"/expense/" + props.id}>+</Link>
+          <Link to={"/expense/" + props.type + "/0"}>
+            <MaterialIcon icon="add_circle" size="15" />
+          </Link>
         </span>
       </div>
       {isClicked && <ExpenseList expenseType={props.type} />}

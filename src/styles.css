@@ -1,31 +1,50 @@
+body {
+  border: rgb(62, 62, 62);
+  border-style: solid;
+  width: 350px;
+}
 .table-header {
   font-size: 15px;
   font-weight: bold;
 }
-
+.edit_icon {
+  padding-right: 10px;
+}
 .planned {
-  color: rgb(192, 196, 6);
+  color: rgb(78, 4, 99);
+  padding-left: 20px;
+  padding-right: 20px;
 }
 .actual {
-  color: rgb(57, 57, 202);
+  color: rgb(109, 84, 3);
+  padding-right: 20px;
 }
 .diff {
-  color: rgb(53, 179, 53);
+  color: rgb(25, 88, 25);
+  padding-right: 20px;
 }
 .expenseType {
-  border: blue;
+  border: rgb(62, 62, 62);
   border-style: solid;
-  background: rgb(235, 233, 233);
+  background: rgb(168, 186, 189);
 }
 .expenseItem {
   color: rgb(219, 77, 77);
 }
+.description {
+  padding-left: 50px;
+  padding-right: 15px;
+}
+.amount {
+  padding-left: 15px;
+  padding-right: 15px;
+}
 .addItem {
-  border: blue;
+  border: rgb(62, 62, 62);
   border-style: ridge;
   padding: 50px;
 }
 .addType {
-  border: blue;
+  border: rgb(62, 62, 62);
   border-style: double;
 }
