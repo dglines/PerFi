@@ -7,8 +7,6 @@ import { BrowserRouter, Route } from "react-router-dom"
 export const App = () => (
   <BrowserRouter>
     <div className="App">
-      {/*<AddExpenseType />
-    <AddExpense />*/}
       <Route exact path="/" component={Home} />
       <Route path="/type/:expense_type_id" component={AddExpenseType} />
       <Route path="/expense/:expense_type/:expense_id" component={AddExpense} />

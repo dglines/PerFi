@@ -48,3 +48,7 @@ body {
   border: rgb(62, 62, 62);
   border-style: double;
 }
+.expense_type_list {
+  border: rgb(62, 62, 62);
+  border-style: solid;
+}

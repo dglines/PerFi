@@ -1,46 +1,44 @@
-// import React, { useState, useEffect } from "react"
-// import ExpenseList from "./ExpenseList"
-// import firebase from "../firebase"
+import React, { useState } from "react"
+import ExpenseList from "./ExpenseList"
+import { connect } from "react-redux"
+import { Link } from "react-router-dom"
+import MaterialIcon from "material-icons-react"
 
-// function useExpenses(type) {
-//   const [expenses, setExpenses] = useState([])
-//   console.log(type)
-//   useEffect(() => {
-//     const unsubscribe = firebase
-//       .firestore()
-//       .collection("ExpenseItems")
-//       .where("type", "==", type)
-//       .onSnapshot(snapshot => {
-//         const newExpenses = snapshot.docs.map(doc => ({
-//           id: doc.id,
-//           ...doc.data()
-//         }))
-//         setExpenses(newExpenses)
-//       })
-//     return () => unsubscribe()
-//   }, [type])
-//   return expenses
-// }
+const ExpenseType = props => {
+  const [isClicked, setClicked] = useState(false)
 
-// export const ExpenseType = props => {
-//   const [isClicked, setClicked] = useState(false)
-//   const expenses = useExpenses(props.type)
-//   console.log(expenses)
-//   let balance = 0
-//   // if (expenses.length > 0) {
-//   //   balance = expenses.reduce((total, cur) => total + cur)
-//   // }
-//   return (
-//     <div className="expense-type" onClick={() => setClicked(!isClicked)}>
-//       <div>
-//         <span>{props.type}......</span>
-//         <span className="planned">{props.budget}</span>
-//         <span>.........</span>
-//         <span className="actual">{balance}</span>
-//         <span>.........</span>
-//         <span className="diff">{props.budget - balance}</span>
-//       </div>
-//       {isClicked && <ExpenseList type={props.type} />}
-//     </div>
-//   )
-// }
+  return (
+    <div>
+      <div className="expenseType" onClick={() => setClicked(!isClicked)}>
+        <Link to={"/type/" + props.id} className="edit_icon">
+          <MaterialIcon icon="edit" size="15" />
+        </Link>
+        <span>{props.type}</span>
+        <span className="planned">{Number(props.budget).toFixed(2)}</span>
+        <span className="actual">{Number(props.balance).toFixed(2)}</span>
+        <span className="diff">
+          {Number(props.budget - props.balance).toFixed(2)}
+        </span>
+        <span>
+          <Link to={"/expense/" + props.type + "/0"}>
+            <MaterialIcon icon="add_circle" size="15" />
+          </Link>
+        </span>
+      </div>
+      {isClicked && <ExpenseList expenseType={props.type} />}
+    </div>
+  )
+}
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    balance: state.expenses
+      .filter(expense => expense.type === ownProps.type)
+      .reduce(
+        (accumulator, expense) => accumulator + parseFloat(expense.amount),
+        0
+      )
+  }
+}
+
+export default connect(mapStateToProps)(ExpenseType)

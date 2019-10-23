@@ -1,5 +1,5 @@
 import React from "react"
-import ExpenseTypeTest from "./ExpenseTypeTest"
+import ExpenseType from "./ExpenseType"
 import ExpenseTypeListHeader from "./ExpenseTypeListHeader"
 import "../styles.css"
 import { connect } from "react-redux"
@@ -28,8 +28,8 @@ function useExpenseTypes() {
 const ExpenseTypeList = props => {
   const expenseTypes = props.expenseTypes.map(type => {
     return (
-      <div key={type.id}>
-        <ExpenseTypeTest
+      <div key={type.id} className="expense_type_list">
+        <ExpenseType
           key={type.id}
           history={props.history}
           id={type.id}
@@ -41,7 +41,7 @@ const ExpenseTypeList = props => {
   })
 
   return (
-    <div>
+    <div className="expense_type_list">
       <ExpenseTypeListHeader />
       {expenseTypes}
     </div>

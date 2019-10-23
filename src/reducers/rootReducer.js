@@ -14,7 +14,9 @@ const initState = {
     { id: "3", amount: "12.45", description: "Toyota", type: "Gas" },
     { id: "4", amount: "111", description: "Geic0", type: "Insurence" },
     { id: "5", amount: "24.67", description: "Kroger", type: "Grocery" }
-  ]
+  ],
+  spent: "345.07",
+  start: "600.00"
 }
 
 const rootReducer = (state = initState, action) => {
