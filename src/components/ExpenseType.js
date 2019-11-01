@@ -6,12 +6,9 @@ import MaterialIcon from "material-icons-react"
 
 const ExpenseType = props => {
   const [isClicked, setClicked] = useState(false)
-  const [icon, setIcon] = useState("chevron_right")
-  //var icon = "chevron_right"
+
   const handleExpand = () => {
-    console.log(isClicked)
     setClicked(!isClicked)
-    isClicked ? setIcon("chevron_right") : setIcon("chevron_left")
   }
 
   const handleAdd = () => {

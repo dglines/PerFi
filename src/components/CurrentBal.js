@@ -12,13 +12,13 @@ const getBalanceColor = money => {
   return "green"
 }
 
-const Balance = props => {
+const CurrentBal = props => {
   const balanceColor = getBalanceColor(props.start - props.spent)
   console.log(props.spent, props.start, balanceColor)
   return (
     <div>
       <h4>
-        <span className="start_bal">Current Balance:_</span>
+        <span className="start_bal">Current Balance: $</span>
         <span style={{ color: balanceColor }}>
           {Number(props.start - props.spent).toFixed(2)}
         </span>
@@ -36,4 +36,4 @@ const mapStateToProps = state => {
     start: parseFloat(state.start)
   }
 }
-export default connect(mapStateToProps)(Balance)
+export default connect(mapStateToProps)(CurrentBal)

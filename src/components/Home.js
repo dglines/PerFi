@@ -1,5 +1,5 @@
 import React from "react"
-import Balance from "./Balance"
+import BalanceBanner from "./BalanceBanner"
 import ExpenseTypeList from "./ExpenseTypeList"
 import { Link } from "react-router-dom"
 import MaterialIcon from "material-icons-react"
@@ -9,7 +9,7 @@ const Home = props => {
   return (
     <div>
       <img src={logo} alt="" height="50" width="50" />
-      <Balance />
+      <BalanceBanner />
       <ExpenseTypeList history={props.history} />
       <br />
       <Link to={"/type/0"}>
