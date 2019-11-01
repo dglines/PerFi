@@ -4,10 +4,17 @@ import CurrentBal from "./CurrentBal"
 
 const BalanceBanner = () => {
   return (
-    <span>
-      <StartBal />
-      <CurrentBal />
-    </span>
+    <div className="row">
+      <div className="col s5">
+        <StartBal />
+      </div>
+      <div className="col s5">
+        <CurrentBal />
+      </div>
+      <div className="col s1">
+        <i className="material-icons small valign-wrapper">add_circle</i>
+      </div>
+    </div>
   )
 }
 

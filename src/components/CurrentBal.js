@@ -1,5 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
+import MaterialIcon from "material-icons-react"
 
 const getBalanceColor = money => {
   if (money < 0) {
@@ -14,15 +15,12 @@ const getBalanceColor = money => {
 
 const CurrentBal = props => {
   const balanceColor = getBalanceColor(props.start - props.spent)
-  console.log(props.spent, props.start, balanceColor)
   return (
     <div>
-      <h4>
-        <span className="start_bal">Current Balance: $</span>
-        <span style={{ color: balanceColor }}>
-          {Number(props.start - props.spent).toFixed(2)}
-        </span>
-      </h4>
+      <span className="cur_bal">Current Balance: $</span>
+      <span style={{ color: balanceColor }}>
+        {Number(props.start - props.spent).toFixed(2)}
+      </span>
     </div>
   )
 }

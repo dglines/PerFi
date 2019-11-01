@@ -4,10 +4,11 @@ import { Link } from "react-router-dom"
 
 const ExpenseItem = props => {
   return (
-    <div className="expenseItem">
-      <Link to={"/expense/" + props.type + "/" + props.id}>
-        <span className="description">{props.description}</span>
-        <span className="amount">{Number(props.amount).toFixed(2)}</span>
+    <div className="expenseItem row">
+      <div className="col s3"></div>
+      <Link to={"/expense/" + props.type + "/" + props.id} className="red-text">
+        <div className="description truncate col s4">{props.description}</div>
+        <div className="amount col s2">{Number(props.amount).toFixed(2)}</div>
       </Link>
     </div>
   )
