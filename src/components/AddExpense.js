@@ -101,7 +101,8 @@ const AddExpense = props => {
       <div>
         <label>Description:</label>
         <input
-          type="description"
+          id="type"
+          type="text"
           value={description}
           onChange={e => setDescription(e.currentTarget.value)}
         />

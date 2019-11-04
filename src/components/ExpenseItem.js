@@ -5,11 +5,16 @@ import { Link } from "react-router-dom"
 const ExpenseItem = props => {
   return (
     <div className="expenseItem row">
-      <div className="col s3"></div>
-      <Link to={"/expense/" + props.type + "/" + props.id} className="red-text">
-        <div className="description truncate col s4">{props.description}</div>
-        <div className="amount col s2">{Number(props.amount).toFixed(2)}</div>
-      </Link>
+      <div className="col s2"></div>
+      <div className="col s10">
+        <Link
+          to={"/expense/" + props.type + "/" + props.id}
+          className="red-text"
+        >
+          <div className="description truncate col s5">{props.description}</div>
+          <div className="amount col s3">{Number(props.amount).toFixed(2)}</div>
+        </Link>
+      </div>
     </div>
   )
 }

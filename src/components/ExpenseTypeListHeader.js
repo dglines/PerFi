@@ -5,19 +5,27 @@ const ExpenseTypeListHeader = props => {
   //console.log(planned, actual)
   return (
     <div>
-      <div className="table-header">
-        <span>Expenses</span>
-        <span className="planned">planned</span>
-        <span className="actual">actual</span>
-        <span className="diff">diff</span>
+      <div className="table-header row">
+        <h4 className="col s2">Expenses</h4>
+        <div className="col s10">
+          <div className="col s3"></div>
+          <h5 className="planned col s2">planned</h5>
+          <h5 className="actual col s2">actual</h5>
+          <h5 className="diff col s3">diff</h5>
+        </div>
       </div>
-      <div>
-        <span>________</span>
-        <span className="planned">{Number(props.planned).toFixed(2)}</span>
-        <span className="actual">{Number(props.actual).toFixed(2)}</span>
-        <span className="diff">
-          {Number(props.planned - props.actual).toFixed(2)}
-        </span>
+      <div className="row">
+        <div className="col s2"></div>
+        <div className="col s10">
+          <div className="col s3"></div>
+          <h6 className="planned col s2">
+            ${Number(props.planned).toFixed(2)}
+          </h6>
+          <h6 className="actual col s2">${Number(props.actual).toFixed(2)}</h6>
+          <h6 className="diff col s3">
+            ${Number(props.planned - props.actual).toFixed(2)}
+          </h6>
+        </div>
       </div>
     </div>
   )

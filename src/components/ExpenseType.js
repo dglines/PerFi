@@ -17,29 +17,38 @@ const ExpenseType = props => {
 
   return (
     <div>
-      <div className="expenseType">
+      <div className="expenseType row valign-wrapper">
         {/*<span>
           <Link to={"/expense/" + props.type + "/0"}>
             <MaterialIcon icon="add_circle" size="15" />
           </Link>
         </span>*/}
-        {isClicked && (
-          <MaterialIcon icon="expand_less" onClick={handleExpand} />
-        )}
-        {!isClicked && (
-          <MaterialIcon icon="expand_more" onClick={handleExpand} />
-        )}
-        <Link to={"/type/" + props.id} className="edit_icon">
-          <MaterialIcon icon="edit" size="15" />
-        </Link>
-        <span className="clickable_expense_type" onClick={handleAdd}>
-          <span>{props.type}</span>
-          <span className="planned">{Number(props.budget).toFixed(2)}</span>
-          <span className="actual">{Number(props.balance).toFixed(2)}</span>
-          <span className="diff">
+        <div className="chevron col s1">
+          {isClicked && (
+            <MaterialIcon icon="expand_less" onClick={handleExpand} />
+          )}
+          {!isClicked && (
+            <MaterialIcon icon="expand_more" onClick={handleExpand} />
+          )}
+        </div>
+        <div className="edit-icon col s1">
+          <Link to={"/type/" + props.id} className="edit_icon">
+            <MaterialIcon icon="edit" size="15" />
+          </Link>
+        </div>
+
+        <div className="clickable_expense_type col s10" onClick={handleAdd}>
+          <div className="col s3 truncate">{props.type}</div>
+          <div className="planned col s2">
+            {Number(props.budget).toFixed(2)}
+          </div>
+          <div className="actual col s2">
+            {Number(props.balance).toFixed(2)}
+          </div>
+          <div className="diff col s3">
             {Number(props.budget - props.balance).toFixed(2)}
-          </span>
-        </span>
+          </div>
+        </div>
       </div>
       {isClicked && <ExpenseList expenseType={props.type} />}
     </div>
