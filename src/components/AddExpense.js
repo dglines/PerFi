@@ -89,7 +89,11 @@ const AddExpense = props => {
         <h4>{btnText} Expense Item</h4>
         {btnText === "Update" && (
           <div>
-            <button type="button" onClick={handleDelete}>
+            <button
+              className="btn-small red"
+              type="button"
+              onClick={handleDelete}
+            >
               Delete
             </button>
           </div>
@@ -118,13 +122,14 @@ const AddExpense = props => {
           onChange={e => setAmount(e.currentTarget.value)}
           required
         />
-        {/* maybe a custom hook for this one? */}
       </div>
-
-      <button type="button" onClick={back}>
+      {/* maybe a custom hook for this one? */}
+      <button className="btn large" type="button" onClick={back}>
         Cancel
       </button>
-      <button onSubmit={onSubmit}>{btnText}</button>
+      <button className="btn large" onSubmit={onSubmit}>
+        {btnText}
+      </button>
     </form>
   )
 }

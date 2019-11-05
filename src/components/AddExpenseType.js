@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { connect } from "react-redux"
+import MaterialIcon from "material-icons-react"
 
 const AddExpenseType = props => {
   const [expenseType, setExpenseType] = useState("")
@@ -46,7 +47,11 @@ const AddExpenseType = props => {
         <h4>{btnText} Expense Category</h4>
         {btnText === "Update" && (
           <div>
-            <button type="button" onClick={handleDelete}>
+            <button
+              className="btn-small red"
+              type="button"
+              onClick={handleDelete}
+            >
               Delete
             </button>
           </div>
@@ -73,10 +78,12 @@ const AddExpenseType = props => {
           />
         </label>
         <br />
-        <button type="button" onClick={back}>
+        <button className="btn" type="button" onClick={back}>
           Cancel
         </button>
-        <button type="submit">{btnText}</button>
+        <button className="btn" type="submit">
+          {btnText}
+        </button>
       </form>
     </div>
   )

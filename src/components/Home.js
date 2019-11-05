@@ -9,7 +9,8 @@ const Home = props => {
   return (
     <div>
       <img src={logo} alt="" height="50" width="50" />
-      <BalanceBanner />
+      <BalanceBanner history={props.history} />
+      <br />
       <ExpenseTypeList history={props.history} />
       <br />
       <Link to={"/type/0"}>

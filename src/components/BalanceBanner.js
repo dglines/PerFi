@@ -1,21 +1,62 @@
 import React from "react"
-import StartBal from "./StartBal"
-import CurrentBal from "./CurrentBal"
+import { connect } from "react-redux"
 
-const BalanceBanner = () => {
+const getBalanceColor = money => {
+  if (money < 0) {
+    return "red"
+  } else if (money < 100) {
+    return "darkorange"
+  } else if (money < 250) {
+    return "gold"
+  }
+  return "green"
+}
+
+const BalanceBanner = props => {
+  const changeStart = () => {
+    props.history.push("/setStart")
+  }
+
+  const addToBalance = () => {
+    props.history.push("/addIncome")
+  }
+  const balance = props.start + props.income - props.spent
+  const balanceColor = getBalanceColor(balance)
   return (
-    <div className="row">
-      <div className="col s5">
-        <StartBal />
+    <div className="balance-banner row">
+      <div
+        className="start_bal col s6 left valign-wrapper"
+        onClick={changeStart}
+      >
+        Start Balance: ${props.start}
       </div>
-      <div className="col s5">
-        <CurrentBal />
-      </div>
-      <div className="col s1">
-        <i className="material-icons small valign-wrapper">add_circle</i>
+      <div className="right valign-wrapper">
+        <span className="cur_bal ">Current Balance: $</span>
+        <span style={{ color: balanceColor }}>
+          {Number(balance).toFixed(2)}
+        </span>
+        <span>
+          <i className="material-icons small right" onClick={addToBalance}>
+            add_circle
+          </i>
+        </span>
       </div>
     </div>
   )
 }
 
-export default BalanceBanner
+const mapStateToProps = state => {
+  return {
+    spent: state.expenses.reduce(
+      (accumulator, expense) => accumulator + parseFloat(expense.amount),
+      0
+    ),
+    start: parseFloat(state.start),
+    income: state.income.reduce(
+      (accumulator, income) => accumulator + parseFloat(income.amount),
+      0
+    )
+  }
+}
+
+export default connect(mapStateToProps)(BalanceBanner)

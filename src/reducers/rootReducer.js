@@ -12,9 +12,10 @@ const initState = {
     { id: "1", amount: "75.50", description: "Kroger", type: "Grocery" },
     { id: "2", amount: "121.45", description: "Sams", type: "Grocery" },
     { id: "3", amount: "12.45", description: "Toyota", type: "Gas" },
-    { id: "4", amount: "111", description: "Geic0", type: "Insurence" },
+    { id: "4", amount: "111", description: "Geico", type: "Insurence" },
     { id: "5", amount: "24.67", description: "Kroger", type: "Grocery" }
   ],
+  income: [{ id: "1", amount: "100", description: "nothing" }],
   spent: "345.07",
   start: "600.00"
 }
@@ -23,7 +24,7 @@ const rootReducer = (state = initState, action) => {
   // Expense Items
   if (action.type === "DELETE_EXPENSE") {
     const newExpenses = state.expenses.filter(
-      expense => expense.id !== action.epense.id
+      expense => expense.id !== action.id
     )
     return {
       ...state,
@@ -102,6 +103,17 @@ const rootReducer = (state = initState, action) => {
     return {
       ...state,
       expenses: [...oldExpenses, ...updatedExpenses]
+    }
+  } else if (action.type === "SET_START") {
+    return {
+      ...state,
+      start: action.amount
+    }
+  } else if (action.type === "ADD_INCOME") {
+    console.log(state.income)
+    return {
+      ...state,
+      income: [...state.income, action.income]
     }
   }
   return state
