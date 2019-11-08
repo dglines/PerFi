@@ -17,7 +17,7 @@ const ExpenseType = props => {
 
   return (
     <div>
-      <div className="expenseType row valign-wrapper">
+      <div className="expenseTypeRow row valign-wrapper">
         {/*<span>
           <Link to={"/expense/" + props.type + "/0"}>
             <MaterialIcon icon="add_circle" size="15" />
@@ -39,14 +39,14 @@ const ExpenseType = props => {
 
         <div className="clickable_expense_type col s10" onClick={handleAdd}>
           <div className="col s3 truncate">{props.type}</div>
-          <div className="planned col s2">
-            {Number(props.budget).toFixed(2)}
+          <div className="planned col s3">
+            ${Number(props.budget).toFixed(2)}
           </div>
-          <div className="actual col s2">
-            {Number(props.balance).toFixed(2)}
+          <div className="actual col s3">
+            ${Number(props.balance).toFixed(2)}
           </div>
           <div className="diff col s3">
-            {Number(props.budget - props.balance).toFixed(2)}
+            ${Number(props.budget - props.balance).toFixed(2)}
           </div>
         </div>
       </div>

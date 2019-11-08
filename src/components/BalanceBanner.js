@@ -13,6 +13,7 @@ const getBalanceColor = money => {
 }
 
 const BalanceBanner = props => {
+  console.log(props)
   const changeStart = () => {
     props.history.push("/setStart")
   }
@@ -51,7 +52,7 @@ const mapStateToProps = state => {
       (accumulator, expense) => accumulator + parseFloat(expense.amount),
       0
     ),
-    start: parseFloat(state.start),
+    start: parseFloat(state.balance.start),
     income: state.income.reduce(
       (accumulator, income) => accumulator + parseFloat(income.amount),
       0

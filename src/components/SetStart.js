@@ -19,11 +19,16 @@ const SetStart = props => {
         <label>$</label>
         <input
           type="number"
-          min="0.01"
           step="0.01"
           value={amount}
           onChange={e => setAmount(e.currentTarget.value)}
         />
+        <button className="btn" onClick={back}>
+          Cancel
+        </button>
+        <button className="btn" onSubmit={onSubmit}>
+          Add
+        </button>
       </form>
     </div>
   )

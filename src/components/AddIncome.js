@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { connect } from "react-redux"
 
 const AddIncome = props => {
-  const [amount, setAmount] = useState(0)
+  const [amount, setAmount] = useState("")
   const [description, setDescription] = useState("")
 
   const onSubmit = e => {
@@ -11,7 +11,6 @@ const AddIncome = props => {
       amount: amount,
       description: description
     }
-    console.log(income)
     props.addIncome(income)
     back()
   }
@@ -32,11 +31,15 @@ const AddIncome = props => {
         <input
           type="number"
           step="0.01"
+          placeholder="0.00"
           value={amount}
           onChange={e => setAmount(e.currentTarget.value)}
         ></input>
+        <button className="btn" onClick={back}>
+          Cancel
+        </button>
         <button className="btn" onSubmit={onSubmit}>
-          add
+          Add
         </button>
       </form>
     </div>

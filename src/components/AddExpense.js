@@ -86,7 +86,7 @@ const AddExpense = props => {
   return (
     <form onSubmit={onSubmit} className="addItem">
       <div>
-        <h4>{btnText} Expense Item</h4>
+        <h4>{btnText} Expense</h4>
         {btnText === "Update" && (
           <div>
             <button
@@ -143,10 +143,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     addExpense: expense => {
-      dispatch({ type: "ADD_EXPENSE", expense: expense })
+      dispatch({ type: "ADD_EXPENSE", expense })
     },
     deleteExpense: id => {
-      dispatch({ type: "DELETE_EXPENSE", id: id })
+      dispatch({ type: "DELETE_EXPENSE", id })
     }
   }
 }

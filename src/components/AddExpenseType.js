@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { connect } from "react-redux"
-import MaterialIcon from "material-icons-react"
+import { addTypeAction } from "../actions/ExpenseTypeActions"
 
 const AddExpenseType = props => {
   const [expenseType, setExpenseType] = useState("")
@@ -98,7 +98,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     addType: newType => {
-      dispatch({ type: "ADD_TYPE", expenseType: newType })
+      //dispatch({ type: "ADD_TYPE", expenseType: newType })
+      dispatch(addTypeAction(newType))
     },
     deleteType: (id, type) => {
       dispatch({ type: "DELETE_TYPE", id: id, expenseType: type })

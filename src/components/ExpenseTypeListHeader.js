@@ -4,27 +4,27 @@ import { connect } from "react-redux"
 const ExpenseTypeListHeader = props => {
   //console.log(planned, actual)
   return (
-    <div>
+    <div className="header-cont container">
       <div className="table-header row">
-        <h4 className="col s2">Expenses</h4>
-        <div className="col s10">
-          <div className="col s3"></div>
-          <h5 className="planned col s2">planned</h5>
-          <h5 className="actual col s2">actual</h5>
-          <h5 className="diff col s3">diff</h5>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col s2"></div>
-        <div className="col s10">
-          <div className="col s3"></div>
-          <h6 className="planned col s2">
-            ${Number(props.planned).toFixed(2)}
-          </h6>
-          <h6 className="actual col s2">${Number(props.actual).toFixed(2)}</h6>
-          <h6 className="diff col s3">
-            ${Number(props.planned - props.actual).toFixed(2)}
-          </h6>
+        <div className="expense-title col s4">Expenses</div>
+        <div className="col">
+          <div className="row">
+            <div className="col-name planned col s8">Planned</div>
+            <div className="col-name actual col s8">Actual</div>
+            <div className="col-name diff col s3">diff</div>
+          </div>
+          <div className="row">
+            <div className="container "></div>
+            <div className="header-bottom planned col ">
+              ${Number(props.planned).toFixed(2)}
+            </div>
+            <div className="header-bottom actual col ">
+              ${Number(props.actual).toFixed(2)}
+            </div>
+            <div className="header-bottom diff col ">
+              ${Number(props.planned - props.actual).toFixed(2)}
+            </div>
+          </div>
         </div>
       </div>
     </div>

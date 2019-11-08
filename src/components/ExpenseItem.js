@@ -11,7 +11,7 @@ const ExpenseItem = props => {
           to={"/expense/" + props.type + "/" + props.id}
           className="red-text"
         >
-          <div className="description truncate col s5">{props.description}</div>
+          <div className="description truncate col s6">{props.description}</div>
           <div className="amount col s3">{Number(props.amount).toFixed(2)}</div>
         </Link>
       </div>
