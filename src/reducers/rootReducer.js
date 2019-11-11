@@ -68,42 +68,46 @@ const rootReducer = (state = initState, action) => {
         expenses: newExpenses
       }
     case "ADD_TYPE":
-      // if id is already present in expenseTypes
-      const existingType = state.expenseTypes.find(
+      const newType = {
+        id: action.expenseType.id,
+        budget: action.expenseType.budget,
+        type: action.expenseType.type
+      }
+      return {
+        ...state,
+        expenseTypes: [...state.expenseTypes, newType]
+      }
+
+    case "UPDATE_TYPE":
+      // get type that is being updated
+      const original = state.expenseTypes.find(
         type => type.id === action.expenseType.id
       )
-      if (typeof existingType === "undefined") {
-        // type is new so insert it into state
-        const newType = {
-          id: action.expenseType.id,
-          budget: action.expenseType.budget,
-          type: action.expenseType.type
-        }
-        return {
-          ...state,
-          expenseTypes: [...state.expenseTypes, newType]
-        }
-      }
+      const existingTypes = state.expenseTypes.filter(
+        type => type.id !== action.expenseType.id
+      )
       // remove expenses that need updated
       const oldExpenses = state.expenses.filter(
-        expense => expense.type !== existingType.type
+        expense => expense.type !== original.type
       )
+
       // grab expenses that need updated
       const updatedExpenses = state.expenses.filter(
-        expense => expense.type === existingType.type
+        expense => expense.type === original.type
       )
       updatedExpenses.forEach(
         expense => (expense.type = action.expenseType.type)
       )
 
-      // update existing type's properties
-      // really not supposed to do it this way.
-      //should create a new state.expenseType instead of modifying
-      existingType.type = action.expenseType.type
-      existingType.budget = action.expenseType.budget
+      const newExpenseType = {
+        type: action.expenseType.type,
+        budget: action.expenseType.budget,
+        id: action.expenseType.id
+      }
 
       return {
         ...state,
+        expenseTypes: [...existingTypes, newExpenseType],
         expenses: [...oldExpenses, ...updatedExpenses]
       }
     case "SET_START":

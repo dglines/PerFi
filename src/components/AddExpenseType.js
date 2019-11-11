@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { connect } from "react-redux"
-import { addTypeAction } from "../actions/ExpenseTypeActions"
+import { addTypeAction, updateTypeAction } from "../actions/ExpenseTypeActions"
 
 const AddExpenseType = props => {
   const [expenseType, setExpenseType] = useState("")
@@ -8,6 +8,7 @@ const AddExpenseType = props => {
   const [id, setID] = useState("")
   const [btnText, setBtnText] = useState("Add")
 
+  // TODO *** double check logic of useEffect hooks
   useEffect(() => {
     const tempType = props.expenseTypes.find(
       type => type.id === props.match.params.expense_type_id
@@ -27,7 +28,24 @@ const AddExpenseType = props => {
 
   const onSubmit = e => {
     e.preventDefault()
-    props.addType({ id: id, type: expenseType, budget: budget })
+    //check if type already exists
+    let typeExists = props.expenseTypes.find(curType => {
+      return curType.type !== expenseType
+    })
+    if (!typeExists) {
+      // Don't allow duplicate types
+      alert("That expense category already exists.")
+      return
+    }
+
+    // check if its an add or update
+    if (btnText === "Add") {
+      props.addType({ id: id, type: expenseType, budget: budget })
+    } else {
+      // TODO *** create update_type action and call its dispatch here
+      props.updateType({ id: id, type: expenseType, budget: budget })
+    }
+
     back()
   }
   // handle delete button click
@@ -100,6 +118,9 @@ const mapDispatchToProps = dispatch => {
     addType: newType => {
       //dispatch({ type: "ADD_TYPE", expenseType: newType })
       dispatch(addTypeAction(newType))
+    },
+    updateType: type => {
+      dispatch(updateTypeAction(type))
     },
     deleteType: (id, type) => {
       dispatch({ type: "DELETE_TYPE", id: id, expenseType: type })

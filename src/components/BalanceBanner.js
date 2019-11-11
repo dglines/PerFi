@@ -13,7 +13,6 @@ const getBalanceColor = money => {
 }
 
 const BalanceBanner = props => {
-  console.log(props)
   const changeStart = () => {
     props.history.push("/setStart")
   }

@@ -19,16 +19,24 @@ body {
 }
 .planned {
   color: rgb(78, 4, 99);
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 0%;
+  padding-right: 0%;
+  margin-left: 0%;
+  margin-right: 0%;
 }
 .actual {
   color: rgb(109, 84, 3);
-  padding-right: 20px;
+  padding-left: 0%;
+  padding-right: 0%;
+  margin-left: 0%;
+  margin-right: 0%;
 }
 .diff {
   color: rgb(25, 88, 25);
-  padding-right: 20px;
+  padding-left: 0%;
+  padding-right: 0%;
+  margin-left: 0%;
+  margin-right: 0%;
 }
 
 .expenseItem {
@@ -60,24 +68,39 @@ body {
 .expense-title {
   font-size: 300%;
 }
-.header-cont {
-  padding-left: 0%;
-  margin-left: 0%;
-  margin-right: 0%;
-}
-.col-name {
-  font-size: 210%;
-  margin-top: 0%;
-  margin-bottom: 0%;
-  margin-left: 3%;
+.header-container {
+  display: flex;
   padding-top: 0%;
   padding-bottom: 0%;
-}
-.header-bottom {
-  font-size: 130%;
-  font-style: bold;
-  padding-bottom: 0%;
-  padding-top: 0%;
   margin-top: 0%;
   margin-bottom: 0%;
+}
+
+.header-planned {
+  display: flex;
+  background: yellowgreen;
+}
+.header-actual {
+  display: flex;
+  background: steelblue;
+}
+.header-diff {
+  display: flex;
+  background: orangered;
+}
+.header-rows {
+  display: flex;
+  flex-direction: row;
+  align-self: auto;
+  padding-left: 15%;
+  font-size: 150%;
+}
+.header-column {
+  display: flex;
+  flex-direction: column;
+  padding-left: 20%;
+  padding-right: 20%;
+}
+.balance-banner {
+  font-size: 175%;
 }
