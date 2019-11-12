@@ -56,16 +56,16 @@ const rootReducer = (state = initState, action) => {
     // Expense Types
     case "DELETE_TYPE":
       // delete expenses of that type
-      newExpenses = state.expenses.filter(
-        expense => expense.type !== action.expenseType
+      let remainingExpenses = state.expenses.filter(
+        expense => expense.type !== action.expenseType.type
       )
-      const newTypes = state.expenseTypes.filter(
-        expenseType => expenseType.id !== action.id
+      const remainingTypes = state.expenseTypes.filter(
+        expenseType => expenseType.id !== action.expenseType.id
       )
-
       return {
-        expenseTypes: newTypes,
-        expenses: newExpenses
+        ...state,
+        expenseTypes: remainingTypes,
+        expenses: remainingExpenses
       }
     case "ADD_TYPE":
       const newType = {

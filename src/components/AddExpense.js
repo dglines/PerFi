@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react"
 import { connect } from "react-redux"
+import {
+  addExpenseAction,
+  updateExpenseAction,
+  deleteExpenseAction
+} from "../actions/ExpenseActions"
 
 const AddExpense = props => {
   //const [type, setType] = useState(props.type)
@@ -143,10 +148,12 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     addExpense: expense => {
-      dispatch({ type: "ADD_EXPENSE", expense })
+      dispatch(addExpenseAction(expense))
+      //  dispatch({ type: "ADD_EXPENSE", expense })
     },
     deleteExpense: id => {
-      dispatch({ type: "DELETE_EXPENSE", id })
+      dispatch(deleteExpenseAction(id))
+      // dispatch({ type: "DELETE_EXPENSE", id })
     }
   }
 }

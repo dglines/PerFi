@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react"
 import { connect } from "react-redux"
-import { addTypeAction, updateTypeAction } from "../actions/ExpenseTypeActions"
+import {
+  addTypeAction,
+  updateTypeAction,
+  deleteTypeAction
+} from "../actions/ExpenseTypeActions"
 
 const AddExpenseType = props => {
   const [expenseType, setExpenseType] = useState("")
@@ -50,6 +54,7 @@ const AddExpenseType = props => {
   }
   // handle delete button click
   const handleDelete = () => {
+    console.log("delete", id)
     props.deleteType(id, expenseType)
     back()
   }
@@ -123,8 +128,9 @@ const mapDispatchToProps = dispatch => {
       dispatch(updateTypeAction(type))
     },
     deleteType: (id, type) => {
-      dispatch({ type: "DELETE_TYPE", id: id, expenseType: type })
+      dispatch(deleteTypeAction({ id, type }))
     }
+    // dispatch({ type: "DELETE_TYPE", id: id, expenseType: type })
   }
 }
 
