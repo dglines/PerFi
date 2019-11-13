@@ -32,47 +32,27 @@ const AddExpense = props => {
     }
   }, [props, props.expenseTypes, props.match.params.expense_type_id, type])
 
-  /* FIREBASE SUBSCRIPTION
-  function onSubmit(e) {
-    e.preventDefault()
-
-    firebase
-      .firestore()
-      .collection("ExpenseItems")
-      .add({
-        type: type,
-        description: description,
-        amount: parseInt(amount)
-      })
-      .then(() => {
-        const increment = firebase.firestore.FieldValue.increment(
-          parseInt(amount)
-        )
-        // add new expense amount to ExpenseType balance
-        firebase
-          .firestore()
-          .collection("ExpenseTypes")
-          .doc(type)
-          .update({ balance: increment })
-      })
-
-    // add new expense amount to ExpenseType balance
-    // firebase
-    //   .firestore()
-    //   .collection("ExpensesTypes")
-    //   .doc(this.state.type)
-    //   .update({ balance: this.state.amount })
-  }
-  */
   const onSubmit = e => {
     e.preventDefault()
     setAmount(parseFloat(amount).toFixed(2))
-    props.addExpense({
-      id: id,
-      type: type,
-      amount: amount,
-      description: description
-    })
+
+    if (btnText === "Add") {
+      // add new expense
+      props.addExpense({
+        id: id,
+        type: type,
+        amount: amount,
+        description: description
+      })
+    } else {
+      // update existing expense
+      props.updateExpense({
+        id,
+        type,
+        amount,
+        description
+      })
+    }
     back()
   }
 
@@ -140,8 +120,8 @@ const AddExpense = props => {
 }
 const mapStateToProps = state => {
   return {
-    expenseTypes: state.expenseTypes,
-    expenses: state.expenses
+    expenseTypes: state.expenseTypes.expenseTypes,
+    expenses: state.expenseTypes.expenses
   }
 }
 
@@ -150,6 +130,9 @@ const mapDispatchToProps = dispatch => {
     addExpense: expense => {
       dispatch(addExpenseAction(expense))
       //  dispatch({ type: "ADD_EXPENSE", expense })
+    },
+    updateExpense: id => {
+      dispatch(updateExpenseAction(id))
     },
     deleteExpense: id => {
       dispatch(deleteExpenseAction(id))

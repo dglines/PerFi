@@ -35,8 +35,10 @@ export const updateExpenseAction = expense => {
       .doc(expense.id)
       .set(
         {
+          id: expense.id,
           type: expense.type,
-          budget: expense.budget
+          amount: expense.amount,
+          description: expense.description
         },
         { merge: true }
       )

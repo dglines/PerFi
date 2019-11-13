@@ -57,7 +57,7 @@ const ExpenseType = props => {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    balance: state.expenses
+    balance: state.expenseTypes.expenses
       .filter(expense => expense.type === ownProps.type)
       .reduce(
         (accumulator, expense) => accumulator + parseFloat(expense.amount),

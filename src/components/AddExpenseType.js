@@ -44,9 +44,10 @@ const AddExpenseType = props => {
 
     // check if its an add or update
     if (btnText === "Add") {
+      // add new type
       props.addType({ id: id, type: expenseType, budget: budget })
     } else {
-      // TODO *** create update_type action and call its dispatch here
+      // update existing type
       props.updateType({ id: id, type: expenseType, budget: budget })
     }
 
@@ -114,7 +115,7 @@ const AddExpenseType = props => {
 
 const mapStateToProps = state => {
   return {
-    expenseTypes: state.expenseTypes
+    expenseTypes: state.expenseTypes.expenseTypes
   }
 }
 

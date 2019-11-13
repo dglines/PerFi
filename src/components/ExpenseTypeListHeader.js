@@ -30,11 +30,11 @@ const ExpenseTypeListHeader = props => {
 
 const mapStateToProps = state => {
   return {
-    planned: state.expenseTypes.reduce(
+    planned: state.expenseTypes.expenseTypes.reduce(
       (accumulator, type) => accumulator + parseFloat(type.budget),
       0
     ),
-    actual: state.expenses.reduce(
+    actual: state.expenseTypes.expenses.reduce(
       (accumulator, expense) => accumulator + parseFloat(expense.amount),
       0
     )

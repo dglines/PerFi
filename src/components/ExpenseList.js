@@ -48,7 +48,7 @@ function ExpenseList(props) {
 // get state from redux
 const mapStateToProps = (state, ownProps) => {
   return {
-    expenses: state.expenses.filter(
+    expenses: state.expenseTypes.expenses.filter(
       expense => expense.type === ownProps.expenseType
     )
   }

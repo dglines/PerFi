@@ -50,7 +50,7 @@ const ExpenseTypeList = props => {
 
 const mapStateToProps = state => {
   return {
-    expenseTypes: state.expenseTypes
+    expenseTypes: state.expenseTypes.expenseTypes
   }
 }
 export default connect(mapStateToProps)(ExpenseTypeList)
